@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { getFilms } from "./services/getFilms";
+import Card from "./components/card";
 
 function App() {
     const [films, setFilms] = useState([]);
@@ -28,19 +29,7 @@ function App() {
                     <h1>Películas y Series Populares</h1>
                     <ul>
                         {films.map((film) => (
-                            <li key={film.id}>
-                                <h2>{film.title || film.name}</h2>
-                                <p>
-                                    {film.overview ||
-                                        "Sin descripción disponible."}
-                                </p>
-                                {film.poster_path && (
-                                    <img
-                                        src={`https://image.tmdb.org/t/p/w200${film.poster_path}`}
-                                        alt={film.title || film.name}
-                                    />
-                                )}
-                            </li>
+                            <Card film={film} key={film.id} />
                         ))}
                     </ul>
                 </div>
