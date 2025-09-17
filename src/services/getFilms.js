@@ -1,4 +1,4 @@
-export const getFilms = async () => {
+export const getFilms = async (page) => {
     const options = {
         method: "GET",
         headers: {
@@ -8,7 +8,7 @@ export const getFilms = async () => {
     };
     try {
         const response = await fetch(
-            "https://api.themoviedb.org/3/trending/all/day?language=es-ES",
+            `https://api.themoviedb.org/3/movie/popular?language=es-ES&page=${page}`,
             options
         );
         if (!response.ok) {
