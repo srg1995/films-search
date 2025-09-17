@@ -1,28 +1,18 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import { getFilms } from "./services/getFilms";
 import Card from "./components/card";
 
+import { useQuery } from "@tanstack/react-query";
+
 function App() {
-    const [films, setFilms] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchFilms = async () => {
-            try {
-                const res = await getFilms();
-                setFilms(res.results);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching films:", error);
-            }
-        };
-        fetchFilms();
-    }, []);
-
+    const { data, isLoading } = useQuery({
+        queryKey: ["films"], // la “key” de la query
+        queryFn: getFilms,
+    });
+    const films = data?.results ?? [];
     return (
         <>
-            {loading ? (
+            {isLoading ? (
                 <p>Cargando películas...</p>
             ) : (
                 <div>
