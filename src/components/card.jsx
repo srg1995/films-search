@@ -1,7 +1,7 @@
 function Card({ film }) {
     return (
         <>
-            <div className="bg-white shadow-lg rounded-2xl overflow-hidden w-64 m-4 hover:scale-105 transition-transform duration-300">
+            <div className=" bg-white shadow-lg rounded-2xl overflow-hidden m-4 hover:scale-105 transition-transform duration-300">
                 <img
                     src={`https://image.tmdb.org/t/p/w200${film.poster_path}`}
                     alt={film.title || film.name}
