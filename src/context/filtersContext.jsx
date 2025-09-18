@@ -11,4 +11,5 @@ export const FiltersProvider = ({ children }) => {
     );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useFilters = () => useContext(filtersContext);
