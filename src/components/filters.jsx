@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { XCircleIcon } from "@heroicons/react/24/solid";
+import { useFilters } from "../context/filtersContext";
 export default function FiltersDropdown({ filters, onChange }) {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState("");
-    const [selected, setSelected] = useState([]);
-
+    const { selectedGenres, setSelectedGenres } = useFilters();
     const filtered = query
         ? filters.filter((f) =>
               f.name.toLowerCase().includes(query.toLowerCase())
@@ -12,12 +12,12 @@ export default function FiltersDropdown({ filters, onChange }) {
         : filters;
 
     function toggleFilter(filter) {
-        const exists = selected.some((s) => s.id === filter.id);
+        const exists = selectedGenres.some((s) => s.id === filter.id);
         const newSelected = exists
-            ? selected.filter((s) => s.id !== filter.id)
-            : [...selected, filter];
+            ? selectedGenres.filter((s) => s.id !== filter.id)
+            : [...selectedGenres, filter];
         setOpen(false);
-        setSelected(newSelected);
+        setSelectedGenres(newSelected);
         onChange?.(newSelected);
     }
 
@@ -70,7 +70,7 @@ export default function FiltersDropdown({ filters, onChange }) {
                                 </li>
                             ) : (
                                 filtered.map((filter) => {
-                                    const isSelected = selected.some(
+                                    const isSelected = selectedGenres.some(
                                         (s) => s.id === filter.id
                                     );
                                     return (
@@ -110,7 +110,7 @@ export default function FiltersDropdown({ filters, onChange }) {
                             <button
                                 type="button"
                                 onClick={() => {
-                                    setSelected([]);
+                                    setSelectedGenres([]);
                                     onChange?.([]);
                                 }}
                                 className="text-sm text-gray-600 hover:text-gray-800"
@@ -122,7 +122,7 @@ export default function FiltersDropdown({ filters, onChange }) {
                 )}
             </div>
             <div className="mt-2 flex">
-                {selected.map((select) => {
+                {selectedGenres.map((select) => {
                     return (
                         <button
                             className={
