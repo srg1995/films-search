@@ -1,13 +1,13 @@
 import "./index.css";
-import { getFilms } from "./services/getFilms";
-import Card from "./components/card";
+import { getFilms } from "@/services/getFilms";
+import Card from "@/components/Card";
 
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import Pagination from "./components/pagination";
-import Filters from "./components/filters";
-import { getGenre } from "./services/getGenre";
-import { FiltersProvider } from "./context/filtersContext";
+import Pagination from "@/components/Pagination";
+import Filters from "@/components/Flters";
+import { getGenre } from "@/services/getGenre";
+import { FiltersProvider } from "@/context/filtersContext";
 
 function App() {
     const [page, setPage] = useState(1);

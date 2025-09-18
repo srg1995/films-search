@@ -1,4 +1,4 @@
-import { useFilters } from "../context/filtersContext";
+import { useFilters } from "@/context/filtersContext";
 import LazyImage from "./LazyImage";
 
 function Card({ film }) {

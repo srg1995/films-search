@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { XCircleIcon } from "@heroicons/react/24/solid";
-import { useFilters } from "../context/filtersContext";
+import { useFilters } from "@/context/filtersContext";
+import { useDebounce } from "@/hooks/useDebounce";
 export default function FiltersDropdown({ filters, onChange }) {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState("");
     const { selectedGenres, setSelectedGenres } = useFilters();
-    const filtered = query
+    const debouncedQuery = useDebounce(query, 400);
+    const filtered = debouncedQuery
         ? filters.filter((f) =>
-              f.name.toLowerCase().includes(query.toLowerCase())
+              f.name.toLowerCase().includes(debouncedQuery.toLowerCase())
           )
         : filters;
 
@@ -24,7 +26,6 @@ export default function FiltersDropdown({ filters, onChange }) {
     return (
         <div className="w-full flex flex-col px-8">
             <div className="w-64 ">
-                {/* Botón principal */}
                 <button
                     type="button"
                     onClick={() => setOpen((o) => !o)}
@@ -48,7 +49,6 @@ export default function FiltersDropdown({ filters, onChange }) {
                     </svg>
                 </button>
 
-                {/* Dropdown */}
                 {open && (
                     <div className="absolute z-20 mt-2  bg-white border rounded-xl shadow-lg">
                         {/* Barra de búsqueda */}
