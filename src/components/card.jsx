@@ -1,4 +1,5 @@
 import { useFilters } from "../context/filtersContext";
+import LazyImage from "./LazyImage";
 
 function Card({ film }) {
     const { selectedGenres } = useFilters();
@@ -9,10 +10,10 @@ function Card({ film }) {
         <>
             {isFiltered && (
                 <div className=" bg-white shadow-lg rounded-2xl overflow-hidden m-4 hover:scale-105 transition-transform duration-300">
-                    <img
+                    <LazyImage
                         src={`https://image.tmdb.org/t/p/w200${film.poster_path}`}
                         alt={film.title || film.name}
-                        className="w-full h-96 object-cover"
+                        className="w-full h-96"
                     />
                     <div className="p-4 flex flex-col justify-between h-48">
                         <h2 className="text-lg font-bold mb-2">
